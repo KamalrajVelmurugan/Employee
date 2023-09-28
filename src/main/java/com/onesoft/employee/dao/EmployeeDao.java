@@ -2,6 +2,8 @@ package com.onesoft.employee.dao;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -13,8 +15,10 @@ public class EmployeeDao {
 
 	@Autowired
 	EmployeeRepositary er;
+	
 	public String setEmp(Employee e) {
 		// TODO Auto-generated method stub
+	
 		er.save(e);
 		return "Succss Kamal" ;
 	}
@@ -29,6 +33,7 @@ public class EmployeeDao {
 	}
 	public List<Employee> getAll() {
 		// TODO Auto-generated method stub
+	
 		return er.findAll();
 	}
 	public String update(Employee e) {

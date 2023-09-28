@@ -4,6 +4,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +14,7 @@ import com.onesoft.employee.entity.Employee;
 import com.onesoft.employee.exception.AgeNotEligibleException;
 import com.onesoft.employee.exception.AgeNotFoundException;
 import com.onesoft.employee.exception.GenderNotFoundException;
-
+import com.onesoft.employee.exception.HighestSalaryException;
 import com.onesoft.employee.exception.NameNotFoundException1;
 import com.onesoft.employee.exception.SalaryNotFoundException;
 
@@ -21,21 +23,28 @@ public class EmployeeService {
 	
 	@Autowired
 	EmployeeDao ed;
-	public String setEmp(Employee e) throws AgeNotEligibleException {
+	
+	public String setEmp(Employee e) throws AgeNotEligibleException, HighestSalaryException {
 		// TODO Auto-generated method stub
-		try {
-			if(e.getAge()<=18) {
-				throw new AgeNotEligibleException("Age Not Accept");
-				
-			}
-			else {
-				return ed.setEmp(e);
-			}
-			
-			
-		}catch(AgeNotEligibleException ane) {
-			return "Not Accepted This Age";
-			
+//		try {
+//			if(e.getAge()<=18) {
+//				throw new AgeNotEligibleException("Age Not Accept");
+//				
+//			}
+//			else {
+//				return ed.setEmp(e);
+//			}
+//			
+//			
+//		}catch(AgeNotEligibleException ane) {
+//			return "Not Accepted";
+//			
+//		}
+		if(e.getSalary()>=50000) {
+			throw new HighestSalaryException("Not Accept this Salary");
+		}
+		else {
+			return ed.setEmp(e);
 		}
 		
 	}
@@ -48,6 +57,7 @@ public class EmployeeService {
 		return ed.getId(a);
 	}
 	public List<Employee> getAll() {
+	
 		// TODO Auto-generated method stub
 		return ed.getAll();
 	}

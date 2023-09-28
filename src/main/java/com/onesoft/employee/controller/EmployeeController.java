@@ -2,6 +2,8 @@ package com.onesoft.employee.controller;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,7 +19,7 @@ import com.onesoft.employee.entity.Employee;
 import com.onesoft.employee.exception.AgeNotEligibleException;
 import com.onesoft.employee.exception.AgeNotFoundException;
 import com.onesoft.employee.exception.GenderNotFoundException;
-
+import com.onesoft.employee.exception.HighestSalaryException;
 import com.onesoft.employee.exception.NameNotFoundException1;
 import com.onesoft.employee.exception.SalaryNotFoundException;
 import com.onesoft.employee.service.EmployeeService;
@@ -27,22 +29,29 @@ public class EmployeeController {
 	@Autowired
 	EmployeeService es;
 	
-	@PostMapping("add")
-	public String setEmp(@RequestBody Employee e) throws AgeNotEligibleException {
+	Logger log = Logger.getLogger(EmployeeController.class);
+	
+	@PostMapping("setEmp")
+	public String setEmp(@RequestBody Employee e) throws AgeNotEligibleException, HighestSalaryException {
+		PropertyConfigurator.configure("log4j");
+		log.info("Welcome");
 		return es.setEmp(e);
 	}
 	
-	@PostMapping("addAll")
+	@PostMapping("setAllEmp")
 	public String setAllEmp(@RequestBody List<Employee> e) {
 		return es.setAllEmp(e);
 	}
 	
 	@GetMapping("find/{a}")
 	public Employee getId(@PathVariable int a){
+		
 		return es.getId(a);
 	}
 	@GetMapping("getAll")
 	public List<Employee> getAll(){
+		PropertyConfigurator.configure("log4j");
+		log.info(es.getAll());
 		return es.getAll();
 	}
 	

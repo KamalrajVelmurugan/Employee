@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.onesoft.employee.entity.Employee;
 import com.onesoft.employee.exception.AgeNotFoundException;
 import com.onesoft.employee.exception.GenderNotFoundException;
+import com.onesoft.employee.exception.HighestSalaryException;
 import com.onesoft.employee.exception.NameNotFoundException1;
 import com.onesoft.employee.exception.SalaryNotFoundException;
 
@@ -34,5 +35,10 @@ public class GlobalException {
 	@ExceptionHandler(GenderNotFoundException.class)
 	public ResponseEntity<Object> salary(GenderNotFoundException ge){
 		return new ResponseEntity<>(ge.getMessage(),HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(HighestSalaryException.class)
+	public ResponseEntity<Object> high(HighestSalaryException hs){
+		return new ResponseEntity<>(hs.getMessage(),HttpStatus.BAD_REQUEST);
 	}
 }

@@ -49,5 +49,12 @@ public class Employee {
 	}
 	private String gender;
 	private int salary;
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", name=" + name + ", age=" + age + ", gender=" + gender + ", salary=" + salary
+				+ ", getId()=" + getId() + ", getName()=" + getName() + ", getAge()=" + getAge() + ", getGender()="
+				+ getGender() + ", getSalary()=" + getSalary() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + ", toString()=" + super.toString() + "]";
+	}
 	
 }

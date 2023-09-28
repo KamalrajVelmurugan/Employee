@@ -18,4 +18,6 @@ public interface EmployeeRepositary extends JpaRepository<Employee, Integer> {
 	@Query(value="select * from test_db.employee where name=?", nativeQuery = true)
 	List<Employee> getName1(String a);
 	
+	
+	
 }
